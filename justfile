@@ -86,3 +86,19 @@ deploy-pool tokenA tokenB fee sqrtPriceX96:
     "{{ tokenB }}" \
     {{ fee }} \
     {{ sqrtPriceX96 }}
+
+create-position tokenA tokenB tokenAAmount tokenBAmount fee:
+  forge script \
+    --private-key {{ env_var('PRIVATE_KEY') }} \
+    --rpc-url {{ env_var('JSON_RPC') }} \
+    --broadcast \
+    --skip-simulation \
+    --slow \
+    --priority-gas-price 1 \
+    --sig "run(address,address,uint24,uint256,uint256)" \
+    scripts/CreatePosition.s.sol:CreatePosition \
+    "{{ tokenA }}" \
+    "{{ tokenB }}" \
+    {{ fee }} \
+    {{ tokenAAmount }} \
+    {{ tokenBAmount }}
