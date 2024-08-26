@@ -7,9 +7,9 @@
     "url": "https://github.com/astriaorg/uniswap.git"
   },
   "scripts": {
-    "prettier": "prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol'",
-    "prettier:list": "prettier --list-different --plugin=prettier-plugin-solidity 'contracts/**/*.sol'",
-    "prettier:check": "prettier --check --plugin=prettier-plugin-solidity 'contracts/**/*.sol'",
+    "prettier": "prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol' 'scripts/**/*.sol'",
+    "prettier:list": "prettier --list-different --plugin=prettier-plugin-solidity 'contracts/**/*.sol' 'scripts/**/*.sol'",
+    "prettier:check": "prettier --check --plugin=prettier-plugin-solidity 'contracts/**/*.sol' 'scripts/**/*.sol'",
     "solhint": "solhint --config ./.solhint.json 'contracts/**/*.sol' --fix",
     "solhint:check": "solhint --config ./.solhint.json 'contracts/**/*.sol'",
     "lint": "npm run prettier && npm run solhint",
