@@ -13,6 +13,8 @@ remappings = [
     '@uniswap/swap-router-contracts/=lib/swap-router-contracts/',
     '@uniswap/lib/=lib/solidity-lib/',
   ]
+optimizer_runs = 800
+bytecode_hash = "none"
 fs_permissions = [
   { access = "read-write", path = "./artifacts/"}
 ]
