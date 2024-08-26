@@ -102,3 +102,18 @@ create-position tokenA tokenB tokenAAmount tokenBAmount fee:
     {{ fee }} \
     {{ tokenAAmount }} \
     {{ tokenBAmount }}
+
+swap tokenIn tokenOut fee amountIn:
+  forge script \
+    --private-key {{ env_var('PRIVATE_KEY') }} \
+    --rpc-url {{ env_var('JSON_RPC') }} \
+    --broadcast \
+    --skip-simulation \
+    --slow \
+    --priority-gas-price 1 \
+    --sig "run(address,address,uint24,uint256)" \
+    scripts/Swap.s.sol:Swap \
+    "{{ tokenIn }}" \
+    "{{ tokenOut }}" \
+    {{ fee }} \
+    {{ amountIn }}
