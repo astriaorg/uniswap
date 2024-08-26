@@ -2,24 +2,19 @@
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import {TransferHelper} from '@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol';
+import { TransferHelper } from "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol";
 import { ISwapRouter02, IV3SwapRouter } from "@uniswap/swap-router-contracts/contracts/interfaces/ISwapRouter02.sol";
 
-import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
-import {DeployScript} from "./DeployScript.s.sol";
-import {console} from "forge-std/Script.sol";
+import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
+import { DeployScript } from "./DeployScript.s.sol";
+import { console } from "forge-std/Script.sol";
 
 contract Swap is DeployScript {
     using Strings for uint256;
 
     ISwapRouter02 private swapRouter;
 
-    function run(
-        address _tokenIn,
-        address _tokenOut,
-        uint24 _fee,
-        uint256 _amountIn
-    ) external {
+    function run(address _tokenIn, address _tokenOut, uint24 _fee, uint256 _amountIn) external {
         start();
 
         console.log("Swapping tokens...");
@@ -34,12 +29,11 @@ contract Swap is DeployScript {
         swapRouter = ISwapRouter02(swapRouter02Address);
 
         // add allowance
-        uint256 maxApproval = 2**256 - 1;
+        uint256 maxApproval = 2 ** 256 - 1;
         TransferHelper.safeApprove(_tokenIn, address(swapRouter), maxApproval);
 
         // swap it
-        ISwapRouter02.ExactInputSingleParams memory params =
-          IV3SwapRouter.ExactInputSingleParams({
+        ISwapRouter02.ExactInputSingleParams memory params = IV3SwapRouter.ExactInputSingleParams({
             tokenIn: _tokenIn,
             tokenOut: _tokenOut,
             fee: _fee,
@@ -47,7 +41,7 @@ contract Swap is DeployScript {
             amountIn: _amountIn,
             amountOutMinimum: 1,
             sqrtPriceLimitX96: 0
-          });
+        });
 
         uint256 amountOut = swapRouter.exactInputSingle(params);
 

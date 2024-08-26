@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import {UniswapV3Factory} from "@uniswap/v3-core/contracts/UniswapV3Factory.sol";
-import {UniswapV3Pool} from "@uniswap/v3-core/contracts/UniswapV3Pool.sol";
+import { UniswapV3Factory } from "@uniswap/v3-core/contracts/UniswapV3Factory.sol";
+import { UniswapV3Pool } from "@uniswap/v3-core/contracts/UniswapV3Pool.sol";
 
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
-import {DeployScript} from "./DeployScript.s.sol";
-import {console} from "forge-std/Script.sol";
+import { DeployScript } from "./DeployScript.s.sol";
+import { console } from "forge-std/Script.sol";
 
 contract DeployPool is DeployScript {
     using Strings for uint256;
@@ -44,14 +44,17 @@ contract DeployPool is DeployScript {
         // INITIALIZE POOL
         v3Pool = UniswapV3Pool(poolAddr);
 
-        (uint160 sqrtPriceX96Check,,,,,,) = v3Pool.slot0();
+        (uint160 sqrtPriceX96Check, , , , , , ) = v3Pool.slot0();
 
         if (sqrtPriceX96Check == 0) {
             console.log("Initializing pool with price sqrtPriceX96 =", uint256(_sqrtPriceX96).toString());
             v3Pool.initialize(_sqrtPriceX96);
             console.log(unicode"  ✓ Pool initialized");
         } else {
-            console.log(unicode"✓ Pool already initialized. Current price sqrtPriceX96 =", uint256(sqrtPriceX96Check).toString());
+            console.log(
+                unicode"✓ Pool already initialized. Current price sqrtPriceX96 =",
+                uint256(sqrtPriceX96Check).toString()
+            );
         }
 
         end();
