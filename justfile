@@ -71,3 +71,18 @@ deploy-erc20 name symbol max_supply decimals="18":
     "{{ symbol }}" \
     {{ decimals }} \
     {{ max_supply }}
+
+deploy-pool tokenA tokenB fee sqrtPriceX96:
+  forge script \
+    --private-key {{ env_var('PRIVATE_KEY') }} \
+    --rpc-url {{ env_var('JSON_RPC') }} \
+    --broadcast \
+    --skip-simulation \
+    --slow \
+    --priority-gas-price 1 \
+    --sig "run(address,address,uint24,uint160)" \
+    scripts/DeployPool.s.sol:DeployPool \
+    "{{ tokenA }}" \
+    "{{ tokenB }}" \
+    {{ fee }} \
+    {{ sqrtPriceX96 }}
