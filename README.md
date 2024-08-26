@@ -121,6 +121,9 @@ Run these commands using `just <command>`:
 - `deploy-weth9 [name] [symbol]`: Deploy WETH9 contract (default name: "Wrapped RIA", default symbol: "WRIA")
 - `weth9-deposit <amount>`: Deposit into WETH9 contract
 - `deploy-erc20 <name> <symbol> <max_supply> [decimals]`: Deploy ERC20 token (default decimals: 18)
+- `deploy-pool <tokenA> <tokenB> <fee> <sqrtPriceX96>`: Deploy a new Uniswap V3 pool
+- `create-position <tokenA> <tokenB> <tokenAAmount> <tokenBAmount> <fee>`: Create a new position in a Uniswap V3 pool
+- `swap <tokenIn> <tokenOut> <fee> <amountIn>`: Execute a token swap on Uniswap V3
 
 ### NPM Scripts
 
