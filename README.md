@@ -2,6 +2,11 @@
 
 This project contains Uniswap related smart contracts and deployment scripts
 
+Make sure you have the following installed:
+
+  * npm
+  * [Foundry + Forge](https://book.getfoundry.sh/getting-started/installation)
+
 ## Setup
 
 1. Clone the repository:
