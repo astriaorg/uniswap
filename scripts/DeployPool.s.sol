@@ -17,6 +17,10 @@ contract DeployPool is DeployScript {
     function run(address _tokenA, address _tokenB, uint24 _fee, uint160 _sqrtPriceX96) external {
         start();
 
+        if (_tokenA > _tokenB) {
+            (_tokenA, _tokenB) = (_tokenB, _tokenA);
+        }
+
         console.log("Deploying Uniswap V3 Pool...");
         console.log("  Token A:", _tokenA);
         console.log("  Token B:", _tokenB);

@@ -1,4 +1,5 @@
 [profile.default]
+solc-version = "0.7.6"
 src = "contracts"
 out = "out"
 libs = ["lib"]
