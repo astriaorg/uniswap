@@ -45,7 +45,7 @@ deploy-wtia9 name=defaultWTIA9Name symbol=defaultWTIA9Symbol:
     "{{ name }}" \
     "{{ symbol }}"
 
-weth9-deposit amount:
+wtia9-deposit amount:
   forge script \
     --private-key {{ env_var('PRIVATE_KEY') }} \
     --rpc-url {{ env_var('JSON_RPC') }} \
@@ -54,7 +54,7 @@ weth9-deposit amount:
     --slow \
     --priority-gas-price 1 \
     --sig "run(uint256)" \
-    scripts/WETH9Deposit.s.sol:WETH9Deposit \
+    scripts/WTIA9Deposit.s.sol:WTIA9Deposit \
     {{ amount }}
 
 deploy-erc20 name symbol max_supply decimals="18":

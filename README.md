@@ -34,13 +34,13 @@ Make sure you have the following installed:
 
 ## Deploying Uniswap V3
 
-1. Deploy WETH9:
+1. Deploy WTIA9 (weth9 based contract):
    ```
-   just deploy-weth9
+   just deploy-wtia9
    ```
    Optionally, customize name and symbol:
    ```
-   just deploy-weth9 "Custom Wrapped Token" "CWRIA"
+   just deploy-wtia9 "Custom Wrapped Token" "CWRIA"
    ```
 
 2. Deploy Uniswap V3 Core:
@@ -85,26 +85,26 @@ To deploy a new ERC20 token:
 
 Note: The `deploy-erc20` command automatically adjusts for decimals, so input the total supply as a human-readable number. For instance, to deploy 1 million tokens with 18 decimals, simply use 1000000 as the total supply.
 
-## Making a WETH9 Deposit
+## Making a WTIA9 Deposit
 
-To deposit native currency (e.g., RIA) into the WETH9 contract and receive wrapped tokens:
+To deposit native currency (e.g., RIA) into the WTIA9 contract and receive wrapped tokens:
 
-1. Ensure you have deployed the WETH9 contract using the `deploy-weth9` command as described earlier.
+1. Ensure you have deployed the WTIA9 contract using the `deploy-wtia9` command as described earlier.
 
-2. Use the `weth9-deposit` command:
+2. Use the `wtia9-deposit` command:
    ```
-   just weth9-deposit <amount>
+   just wtia9-deposit <amount>
    ```
    Parameter:
    - `<amount>`: The amount of native currency to deposit, in wei.
 
    Example:
    ```
-   just weth9-deposit 1000000000000000000
+   just wtia9-deposit 1000000000000000000
    ```
    This deposits 1 native token (assuming 18 decimal places).
 
-3. The command will execute a transaction to deposit the specified amount into the WETH9 contract.
+3. The command will execute a transaction to deposit the specified amount into the WTIA9 contract.
 
 4. Upon successful execution, you will receive an equivalent amount of wrapped tokens (e.g., WRIA).
 
@@ -118,8 +118,8 @@ Run these commands using `just <command>`:
 
 - `deploy-uniswapv3 [nativeCurrencyLabel]`: Deploy UniswapV3 contracts (default nativeCurrencyLabel: "RIA")
 - `transfer-ownership <new_owner>`: Transfer ownership of contracts
-- `deploy-weth9 [name] [symbol]`: Deploy WETH9 contract (default name: "Wrapped RIA", default symbol: "WRIA")
-- `weth9-deposit <amount>`: Deposit into WETH9 contract
+- `deploy-wtia9 [name] [symbol]`: Deploy WTIA9 contract (default name: "Wrapped RIA", default symbol: "WRIA")
+- `wtia9-deposit <amount>`: Deposit into WTIA9 contract
 - `deploy-erc20 <name> <symbol> <max_supply> [decimals]`: Deploy ERC20 token (default decimals: 18)
 - `deploy-pool <tokenA> <tokenB> <fee> <sqrtPriceX96>`: Deploy a new Uniswap V3 pool
 - `create-position <tokenA> <tokenB> <tokenAAmount> <tokenBAmount> <fee>`: Create a new position in a Uniswap V3 pool
