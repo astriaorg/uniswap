@@ -15,7 +15,7 @@
 
 pragma solidity =0.7.6;
 
-contract WETH9 {
+contract WTIA9 {
     string public name;
     string public symbol;
     uint8 public decimals = 18;

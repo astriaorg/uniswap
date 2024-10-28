@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity =0.7.6;
 
-import { WETH9 } from "../contracts/WETH9.sol";
+import { WTIA9 } from "../contracts/WTIA9.sol";
 
 import { DeployScript } from "./DeployScript.s.sol";
 import { console } from "forge-std/Script.sol";
 
-contract DeployWETH9 is DeployScript {
+contract DeployWTIA9 is DeployScript {
     function run(string memory _name, string memory _symbol) external {
         start();
 
@@ -16,7 +16,7 @@ contract DeployWETH9 is DeployScript {
             console.log("  Name:", _name);
             console.log("  Symbol:", _symbol);
 
-            WETH9 weth9 = new WETH9(_name, _symbol);
+            WTIA9 weth9 = new WTIA9(_name, _symbol);
             weth9Address = address(weth9);
 
             console.log(unicode"  ✓ WETH9 deployed at:", weth9Address);

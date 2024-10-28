@@ -20,3 +20,5 @@ fs_permissions = [
   { access = "read-write", path = "./artifacts/"}
 ]
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
+[profile.uniswap]
+src = "lib"

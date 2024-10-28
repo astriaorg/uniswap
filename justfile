@@ -4,9 +4,9 @@ default:
 set dotenv-load
 set fallback
 
-defaultNativeCurrencyLabel := "RIA"
-defaultWETH9Name := "Wrapped RIA"
-defaultWETH9Symbol := "WRIA"
+defaultNativeCurrencyLabel := "TIA"
+defaultWTIA9Name := "Wrapped Celestia"
+defaultWTIA9Symbol := "WTIA"
 
 deploy-uniswapv3 nativeCurrencyLabel=defaultNativeCurrencyLabel:
   forge script \
@@ -32,7 +32,7 @@ transfer-ownership new_owner:
     scripts/TransferOwnership.s.sol:TransferOwnership \
     "{{ new_owner }}"
 
-deploy-weth9 name=defaultWETH9Name symbol=defaultWETH9Symbol:
+deploy-wtia9 name=defaultWTIA9Name symbol=defaultWTIA9Symbol:
   forge script \
     --private-key {{ env_var('PRIVATE_KEY') }} \
     --rpc-url {{ env_var('JSON_RPC') }} \
@@ -41,7 +41,7 @@ deploy-weth9 name=defaultWETH9Name symbol=defaultWETH9Symbol:
     --slow \
     --priority-gas-price 1 \
     --sig "run(string,string)" \
-    scripts/DeployWETH9.s.sol:DeployWETH9 \
+    scripts/DeployWTIA9.s.sol:DeployWTIA9 \
     "{{ name }}" \
     "{{ symbol }}"
 
@@ -117,3 +117,22 @@ swap tokenIn tokenOut fee amountIn:
     "{{ tokenOut }}" \
     {{ fee }} \
     {{ amountIn }}
+
+verify-wtia9 name=defaultWTIA9Name symbol=defaultWTIA9Symbol:
+  forge verify-contract \
+    --chain-id $(cast chain-id --rpc-url {{ env_var('JSON_RPC') }}) \
+    --constructor-args $(cast abi-encode "constructor(string,string)" "{{ name }}" "{{ symbol }}") \
+    $(jq -r .weth9Address {{ env_var('DEPLOY_JSON') }}) \
+    contracts/WTIA9.sol:WTIA9 \
+    --skip-is-verified-check \
+    --verifier blockscout \
+    --verifier-url {{ env_var('BLOCKSCOUT_URL') }}/api
+
+verify-v3-core-factory:
+  FOUNDRY_PROFILE=uniswap \
+  forge verify-contract \
+    --chain-id $(cast chain-id --rpc-url {{ env_var('JSON_RPC') }}) \
+    $(jq -r .v3CoreFactoryAddress {{ env_var('DEPLOY_JSON') }}) \
+    lib/v3-core/contracts/UniswapV3Factory.sol:UniswapV3Factory \
+    --verifier blockscout \
+    --verifier-url {{ env_var('BLOCKSCOUT_URL') }}/api
